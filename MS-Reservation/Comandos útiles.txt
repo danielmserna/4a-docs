@@ -10,7 +10,7 @@ http://localhost:8080/
 .\mvnw spring-boot:run
 .\mvnw package
 heroku login -i
-heroku container:login:
+heroku container:login
 heroku create c4-reservation-ms
 heroku container:push web --app c4-reservation-ms
 heroku container:release web --app c4-reservation-ms
