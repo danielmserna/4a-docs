@@ -1,0 +1,7 @@
+node src/index.js
+heroku login -i
+heroku create c4-apigateway
+heroku container:login
+heroku container:push web --app c4-apigateway
+heroku container:release web --app c4-apigateway
+heroku open --app c4-apigateway
