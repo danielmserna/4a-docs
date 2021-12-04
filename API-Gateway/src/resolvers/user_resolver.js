@@ -2,7 +2,7 @@ const usersResolver = {
     Query: {
         userDetailById: (_, { userId }, { dataSources, userIdToken }) => {
             if (userId == userIdToken)
-                return dataSources.UserApi.getUser(userId)
+                return dataSources.userApi.getUser(userId)
             else
                 return null
 
@@ -16,12 +16,12 @@ const usersResolver = {
                 name: userInput.name,
                 email: userInput.email,
             }
-            return await dataSources.roomAPI.createUser(uInput);
+            return await dataSources.userAPI.createUser(uInput);
         },
         logIn: (_, { credentials }, { dataSources }) =>
-            dataSources.UserAPI.authRequest(credentials),
+            dataSources.userAPI.authRequest(credentials),
         refreshToken: (_, { refresh }, { dataSources }) =>
-            dataSources.UserAPI.refreshToken(refresh),
+            dataSources.userAPI.refreshToken(refresh),
 
     }
 };

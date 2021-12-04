@@ -1,6 +1,6 @@
 const { RESTDataSource } = require('apollo-datasource-rest');
 const serverConfig = require('../server');
-class UserAPI extends RESTDataSource {
+class userAPI extends RESTDataSource {
     constructor() {
         super();
         this.baseURL = serverConfig.user_api_url;
@@ -10,7 +10,6 @@ class UserAPI extends RESTDataSource {
         return await this.post(`/user/`, user);
     }
     async getUser(userId) {
-
         return await this.get(`/user/${userId}/`);
     }
     async authRequest(credentials) {
@@ -19,7 +18,7 @@ class UserAPI extends RESTDataSource {
     }
     async refreshToken(token) {
         token = new Object(JSON.parse(JSON.stringify({ refresh: token })));
-        return await this.post(`/refresh/`, token);
+        return await this.post(`/refresh`, token);
     }
 }
-module.exports = UserAPI;
+module.exports = userAPI;

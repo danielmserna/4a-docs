@@ -5,7 +5,7 @@ const userTypeDefs = gql`
         access: String!
     }
 
-        type Access {
+    type Access {
         access: String!
     }
 
