@@ -25,7 +25,7 @@ const routes = [
         path: '/user/home',
         name: "home",
         component: Home,
-        meta: { requiresAuth: true }
+        meta: { requiresAuth: false }
     },
     {
         path: '/habitaciones',
@@ -61,7 +61,7 @@ const router = createRouter({
 });
 
 const apolloClient = new ApolloClient({
-    link: createHttpLink({ uri: 'https://mision-tic-api-gateway.herokuapp.com/' }),
+    link: createHttpLink({ uri: 'https://c4-apigateway.herokuapp.com/' }),
     cache: new InMemoryCache()
 })
 

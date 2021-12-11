@@ -1,20 +1,61 @@
 <template>
-
-    <div class="logIn_user">
-        <div class="container_logIn_user">
-            <h2>Iniciar sesión</h2>
-
-            <form v-on:submit.prevent="processLogInUser" >
-                <input type="text" v-model="user.username" placeholder="Usuario">
-                <br>
-                <input type="password" v-model="user.password" placeholder="Contraseña">
-                <br>
-                <button type="submit">Iniciar Sesión</button>
-            </form>
+  <div class="container">
+    <div class="wrapper d-flex align-items-center justify-content-center h-100">
+      <div class="card login-form">
+        <div class="card-body">
+          <h5 class="card-title text-center">Iniciar sesión</h5>
+          <form v-on:submit.prevent="processLogInUser">
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Usuario</label>
+              <input
+                type="text"
+                class="form-control"
+                id="exampleInputEmail1"
+                v-model="user.username"                
+              />
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label"
+                >Contraseña</label
+              >
+              <input
+                type="password"
+                v-model="user.password"
+                class="form-control"
+                id="exampleInputPassword1"
+              />
+            </div>
+            <button type="submit" class="btn btn-primary w-100">
+              Ingresar
+            </button>
+            <div class="sign-up mt-4">
+              ¿No tienes cuenta? <a href="#" v-on:click="loadSignUp">Crea una cuenta</a>
+            </div>
+          </form>
         </div>
-
+      </div>
     </div>
+  </div>
 
+  <!-- 
+  <div class="logIn_user">
+    <div class="container_logIn_user">
+      <h2>Iniciar sesión</h2>
+
+      <form v-on:submit.prevent="processLogInUser">
+        <input type="text" v-model="user.username" placeholder="Usuario" />
+        <br />
+        <input
+          type="password"
+          v-model="user.password"
+          placeholder="Contraseña"
+        />
+        <br />
+        <button type="submit">Iniciar Sesión</button>
+      </form>
+    </div>
+  </div>
+  -->
 </template>
 
 
@@ -24,7 +65,7 @@ import gql from "graphql-tag";
 export default {
   name: "LogIn",
 
-  data: function() {
+  data: function () {
     return {
       user: {
         username: "",
@@ -34,11 +75,11 @@ export default {
   },
 
   methods: {
-    processLogInUser: async function() {
+    processLogInUser: async function () {
       await this.$apollo
         .mutate({
           mutation: gql`
-            mutation($credentials: CredentialsInput!) {
+            mutation ($credentials: CredentialsInput!) {
               logIn(credentials: $credentials) {
                 refresh
                 access
@@ -62,74 +103,25 @@ export default {
           alert("ERROR 401: Credenciales Incorrectas.");
         });
     },
+    loadSignUp: function(){
+      this.$router.push({name: "signUp"})
+    },
   },
-}
+};
 </script>
 
 
 <style>
+html, body, .container{
+  height: 100%;
+}
 
-    .logIn_user{
-        margin: 0;
-        padding: 0%;
-        height: 100%;
-        width: 100%;
-    
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+.login-form {
+  width: 350px;
+  padding: 2rem 1rem 1rem;
+}
 
-    .container_logIn_user {
-        border: 3px solid  #283747;
-        border-radius: 10px;
-        width: 25%;
-        height: 60%;
-        
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .logIn_user h2{
-        color: #283747;
-
-    }
-
-    .logIn_user form{
-        width: 70%;
-        
-    }
-
-    .logIn_user input{
-        height: 40px;
-        width: 100%;
-
-        box-sizing: border-box;
-        padding: 10px 20px;
-        margin: 5px 0;
-
-        border: 1px solid #283747;
-    }
-
-    .logIn_user button{
-        width: 100%;
-        height: 40px;
-
-        color: #E5E7E9;
-        background: #283747;
-        border: 1px solid #E5E7E9;
-
-        border-radius: 5px;
-        padding: 10px 25px;
-        margin: 5px 0;
-    }
-
-    .logIn_user button:hover{
-        color: #E5E7E9;
-        background: crimson;
-        border: 1px solid #283747;
-    }
-
+form {
+  padding: 1rem;
+}
 </style>

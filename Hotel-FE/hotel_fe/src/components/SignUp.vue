@@ -1,5 +1,6 @@
 <template>
 
+  <!--
     <div class="signUp_user">
         <div class="container_signUp_user">
             <h2>Registrarse</h2>
@@ -22,6 +23,68 @@
         </div>
 
     </div>
+    -->
+
+
+    <div class="container">
+    <div class="wrapper d-flex align-items-center justify-content-center h-100">
+      <div class="card login-form">
+        <div class="card-body">
+          <h5 class="card-title text-center">Registrarse</h5>
+          <form v-on:submit.prevent="processSignUp">
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Usuario</label>
+              <input
+                type="text"
+                class="form-control"
+                id="exampleInputEmail1"
+                v-model="user.username"
+                aria-describedby="emailHelp"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label"
+                >Contraseña</label
+              >
+              <input
+                type="password"
+                v-model="user.password"
+                class="form-control"
+                id="exampleInputPassword1"
+              />
+            </div>
+            
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Nombre</label>
+              <input
+                type="text"
+                class="form-control"
+                id="exampleInputEmail1"
+                v-model="user.name"
+                
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Correo</label>
+              <input
+                type="email"
+                class="form-control"
+                id="exampleInputEmail1"
+                v-model="user.email"
+                aria-describedby="emailHelp"
+              />
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">
+              Registrar
+            </button>
+            
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </template>
 
@@ -81,67 +144,16 @@ export default {
 
 <style>
 
-    .signUp_user{
-        margin: 0;
-        padding: 0%;
-        height: 100%;
-        width: 100%;
-    
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
+html, body, .container{
+  height: 100%;
+}
 
-    .container_signUp_user {
-        border: 3px solid  #283747;
-        border-radius: 10px;
-        width: 25%;
-        height: 60%;
-        
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
+.login-form {
+  width: 350px;
+  padding: 2rem 1rem 1rem;
+}
 
-    .signUp_user h2{
-        color: #283747;
-
-    }
-
-    .signUp_user form{
-        width: 70%;
-        
-    }
-
-    .signUp_user input{
-        height: 40px;
-        width: 100%;
-
-        box-sizing: border-box;
-        padding: 10px 20px;
-        margin: 5px 0;
-
-        border: 1px solid #283747;
-    }
-
-    .signUp_user button{
-        width: 100%;
-        height: 40px;
-
-        color: #E5E7E9;
-        background: #283747;
-        border: 1px solid #E5E7E9;
-
-        border-radius: 5px;
-        padding: 10px 25px;
-        margin: 5px 0 25px 0;
-    }
-
-    .signUp_user button:hover{
-        color: #E5E7E9;
-        background: crimson;
-        border: 1px solid #283747;
-    }
-
+form {
+  padding: 1rem;
+}
 </style>

@@ -21,7 +21,7 @@
       </h2>
     </div>
   </div>
-  
+
 </template>
 
 
@@ -58,15 +58,16 @@ export default {
         return {
           userId: this.userId,
         };
-      }
+      },
     },
-  }
+  },
+
+  
 };
 </script>
 
 
 <style>
-
 .information {
   margin: 0;
   padding: 0%;
@@ -110,5 +111,4 @@ export default {
   padding: 30px 80px;
   margin: 30px 0 0 0;
 }
-
 </style>
