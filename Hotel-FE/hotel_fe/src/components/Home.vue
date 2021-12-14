@@ -1,114 +1,104 @@
 <template>
-
-  <div class="information">
-    <h1>
-      ¡Bienvenido
-      <span>{{ userDetailById.name }}</span
-      >!
-    </h1>
-
-    <div class="details">
-      <h3>Su información es la siguiente</h3>
-
-      <h2>
-        Nombre de usuario:
-        <span>{{ userDetailById.username }}</span>
-      </h2>
-
-      <h2>
-        Correo electrónico:
-        <span>{{ userDetailById.email }}</span>
-      </h2>
+  <div class="row center-xs ">
+    <div class="col-xs-8" style=" height: 79vh !important;">
+      <div
+        id="carouselExampleIndicators"
+        class="carousel slide"
+        data-bs-ride="carousel"
+      >
+        <div class="carousel-indicators" >
+          <button
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide-to="0"
+            class="active"
+            aria-current="true"
+            aria-label="¡Bienvenidos Usuarios!"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide-to="1"
+            aria-label="¿Quienes somos?"
+          ></button>
+          <button
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide-to="2"
+            aria-label="Somos una empresa dedicada a las reservas de habitaciones de los mejores hoteles del país"
+          ></button>
+        </div>
+        <div class="carousel-inner" style=" height: 79vh !important;">
+          <div class="carousel-item active">
+            <img
+              src="../assets/rcarousel1.jpg"
+              class="d-block w-100"
+              alt="..."
+            />
+            <div class="carousel-caption d-none d-md-block" style=" height: 79vh !important;">
+              <h1>¡Bienvenidos Usuarios!</h1>
+            </div>
+          </div>
+          <div class="carousel-item" >
+            <img
+              src="../assets/rcarousel2.jpg"
+              class="d-block w-100"
+              alt="..."
+            />
+            <div class="carousel-caption d-none d-md-block" style=" height: 79vh !important;">
+              <h1>¿Quienes somos?</h1>
+            </div>
+          </div>
+          <div class="carousel-item" >
+            <img
+              src="../assets/rcarousel3.jpg"
+              class="d-block w-100"
+              alt="..."
+            />
+            <div class="carousel-caption d-none d-md-block" style=" height: 79vh !important;">
+              <h1>
+                Somos una empresa dedicada a las reservas de habitaciones de los
+                mejores hoteles del país
+              </h1>
+            </div>
+          </div>
+        </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#carouselExampleIndicators"
+          data-bs-slide="prev"          
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#carouselExampleIndicators"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
     </div>
   </div>
-
 </template>
 
-
 <script>
-import gql from "graphql-tag";
-import jwt_decode from "jwt-decode";
-
 export default {
   name: "Home",
 
-  data: function () {
+  data() {
     return {
-      userId: jwt_decode(localStorage.getItem("token_refresh")).user_id,
-      userDetailById: {
-        username: "",
-        name: "",
-        email: "",
-      },
+      slider: null,
+      height: null,
     };
   },
-
-  apollo: {
-    userDetailById: {
-      query: gql`
-        query ($userId: Int!) {
-          userDetailById(userId: $userId) {
-            username
-            name
-            email
-          }
-        }
-      `,
-      variables() {
-        return {
-          userId: this.userId,
-        };
-      },
-    },
-  },
-
-  
+  methods: {},
 };
 </script>
 
-
 <style>
-.information {
-  margin: 0;
-  padding: 0%;
-  width: 100%;
-  height: 100%;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.information h1 {
-  font-size: 60px;
-  color: #283747;
-}
-
-.information h2 {
-  font-size: 40px;
-  color: #283747;
-}
-
-.information span {
-  color: crimson;
-  font-weight: bold;
-}
-
-.details h3 {
-  font-size: 35px;
-  color: #283747;
-  text-align: center;
-}
-
-.details h2 {
-  font-size: 35px;
-  color: #283747;
-}
-.details {
-  border: 3px solid rgba(0, 0, 0, 0.3);
-  border-radius: 20px;
-  padding: 30px 80px;
-  margin: 30px 0 0 0;
-}
 </style>

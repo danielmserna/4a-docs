@@ -10,6 +10,7 @@ class userAPI extends RESTDataSource {
         return await this.post(`/user/`, user);
     }
     async getUser(userId) {
+        console.log(userId);
         return await this.get(`/user/${userId}/`);
     }
     async authRequest(credentials) {

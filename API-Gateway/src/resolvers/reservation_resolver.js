@@ -3,6 +3,9 @@ const reservationResolver = {
         getReservation: (_, { getInput }, { dataSources }) => {
             return dataSources.reservationAPI.getReservation(getInput)
         },
+        getReservations: (_, { unnecessaryString }, { dataSources }) => {
+            return dataSources.reservationAPI.getReservations()
+        },               
     },
     Mutation: {
         createReservation: async (_, { createInput }, { dataSources }) => {

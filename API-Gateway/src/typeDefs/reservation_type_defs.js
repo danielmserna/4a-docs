@@ -26,6 +26,7 @@ const reservationTypeDefs = gql `
     }
         extend type Query {
         getReservation(getInput: Int!): ReservationOut
+        getReservations(getInput: Int): [ReservationOut]
     }
     extend type Mutation {
         createReservation(createInput: ReservationIn!): ReservationOut!

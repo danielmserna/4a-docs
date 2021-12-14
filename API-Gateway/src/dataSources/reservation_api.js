@@ -12,6 +12,9 @@ class reservationAPI extends RESTDataSource {
     async getReservation(getInput) {
         return await this.get(`/reservation/${getInput}`);
     }
+    async getReservations() {
+        return await this.get(`/reservations/all`);
+    }
     async updateReservation(Reservation) {
         Reservation = new Object(JSON.parse(JSON.stringify(Reservation)));
         return await this.put(`/reservation/update`, Reservation);

@@ -11,10 +11,13 @@ import {library} from "@fortawesome/fontawesome-svg-core"
 import { faPhone,faUser,faCodeBranch } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome"
 
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+
 library.add(faPhone,faUser,faCodeBranch)
 
 const httpLink = createHttpLink({
-    uri: 'https://c4-apigateway.herokuapp.com/',
+    uri: 'https://c4-apigateway2.herokuapp.com/', //https://c4-apigateway.herokuapp.com/
 })
 
 const authLink = setContext((_, { headers }) => {
@@ -35,4 +38,4 @@ const apolloProvider = new createApolloProvider({
     defaultClient: apolloClient
 })
 
-createApp(App).component("fa",FontAwesomeIcon).use(router).use(apolloProvider).mount('#app')
+createApp(App).component("fa",FontAwesomeIcon).use(VueSweetalert2).use(router).use(apolloProvider).mount('#app')

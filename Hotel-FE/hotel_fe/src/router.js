@@ -37,7 +37,7 @@ const routes = [
         path: '/user/reservas',
         name: "reservas",
         component: Reservas,
-        meta: { requiresAuth: true }
+        meta: { requiresAuth: false }
     },
     /*
     {
@@ -61,7 +61,7 @@ const router = createRouter({
 });
 
 const apolloClient = new ApolloClient({
-    link: createHttpLink({ uri: 'https://c4-apigateway.herokuapp.com/' }),
+    link: createHttpLink({ uri: 'https://c4-apigateway2.herokuapp.com/' }), //https://c4-apigateway.herokuapp.com/
     cache: new InMemoryCache()
 })
 
@@ -71,6 +71,7 @@ async function isAuth() {
     }
 
     try {
+
         var result = await apolloClient.mutate({
             mutation: gql`
                 mutation ($refresh: String!) {
@@ -88,7 +89,9 @@ async function isAuth() {
         return true;
     } catch {
         localStorage.clear();
-        alert("Su sesión expiró, por favor vuelva a iniciar sesión");
+
+        alert("ERROR Su sesión expiró, por favor vuelva a iniciar sesión error");        
+
         return false;
     }
 }

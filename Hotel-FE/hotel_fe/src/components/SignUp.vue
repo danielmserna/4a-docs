@@ -1,5 +1,4 @@
 <template>
-
   <!--
     <div class="signUp_user">
         <div class="container_signUp_user">
@@ -25,8 +24,7 @@
     </div>
     -->
 
-
-    <div class="container">
+  <div class="container">
     <div class="wrapper d-flex align-items-center justify-content-center h-100">
       <div class="card login-form">
         <div class="card-body">
@@ -53,7 +51,7 @@
                 id="exampleInputPassword1"
               />
             </div>
-            
+
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Nombre</label>
               <input
@@ -61,7 +59,6 @@
                 class="form-control"
                 id="exampleInputEmail1"
                 v-model="user.name"
-                
               />
             </div>
 
@@ -79,13 +76,11 @@
             <button type="submit" class="btn btn-primary w-100">
               Registrar
             </button>
-            
           </form>
         </div>
       </div>
     </div>
   </div>
-
 </template>
 
 
@@ -93,26 +88,26 @@
 import gql from "graphql-tag";
 
 export default {
-    name: "SignUp",
+  name: "SignUp",
 
-    data: function() {
-        return {
-        user: {
-            username: "",
-            password: "",
-            name: "",
-            email: "",
-            balance: 0,
-        },
-        };
-    },
+  data: function () {
+    return {
+      user: {
+        username: "",
+        password: "",
+        name: "",
+        email: "",
+        balance: 0,
+      },
+    };
+  },
 
   methods: {
-    processSignUp: async function() {
+    processSignUp: async function () {
       await this.$apollo
         .mutate({
           mutation: gql`
-            mutation($userInput: SignUpInput!) {
+            mutation ($userInput: SignUpInput!) {
               signUpUser(userInput: $userInput) {
                 refresh
                 access
@@ -130,30 +125,33 @@ export default {
             token_refresh: result.data.signUpUser.refresh,
           };
 
-          this.$emit("completedSignUp", dataLogIn);
+          //this.$emit("completedSignUp", dataLogIn);
+
+          
+          this.$swal.fire("OK", "Registro exitoso", "success");
+          console.log(dataLogIn);
+
+          localStorage.setItem("username", dataLogIn.username);
+          localStorage.setItem("token_access", dataLogIn.token_access);
+          localStorage.setItem("token_refresh", dataLogIn.token_refresh);
+
+          this.loadHome();
+          
         })
         .catch((error) => {
-          alert("ERROR: Fallo en el registro.");
+          this.$swal.fire("ERROR", "ERROR: Fallo en el registro.", "error");
+          //alert("ERROR: Fallo en el registro.");
         });
     },
-
+    loadHome: function () {
+      this.$router.push({ name: "home" });
+    },
+    
   },
-}
+};
 </script>
 
 
 <style>
 
-html, body, .container{
-  height: 100%;
-}
-
-.login-form {
-  width: 350px;
-  padding: 2rem 1rem 1rem;
-}
-
-form {
-  padding: 1rem;
-}
 </style>

@@ -1,85 +1,32 @@
 <template>
   <div id="app" class="app">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="container-fluid">
-        <!-- Icono de NAVBAR -->
-        <nav class="navbar navbar-dark">
-          <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-              <img
-                src="./assets/hotel.png"
-                alt=""
-                width="30"
-                height="24"
-                class="d-inline-block align-top"
-              />
-            </a>
-          </div>
-        </nav>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex">
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                href="#"
-                v-if="is_auth"
-                v-on:click="loadReservas"
-                >Reservas</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#" v-on:click="loadHabitaciones"
-                >Habitaciones</a
-              >
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#" v-if="is_auth" v-on:click="logOut"
-                >Cerrar Sesión</a
-              >
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                href="#"
-                v-if="!is_auth"
-                v-on:click="loadLogIn"
-                >Iniciar Sesión</a
-              >
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                href="#"
-                v-if="!is_auth"
-                v-on:click="loadSignUp"
-                >Registrarse</a
-              >
-            </li>
-          </ul>
-
-          <form class="d-flex">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Buscar"
-              aria-label="Buscar"
+    <div class="header">
+      <div class="titulo">
+        <div class="navbar-header">
+          <a type="button" class="image" v-on:click="loadHome">
+            <img
+              src="./assets/logo3.png"
+              alt="Alternate Text"
+              style="width: 50%"
             />
-            <button class="btn btn-outline-light" type="submit">Buscar</button>
-          </form>
+          </a>
+          TURISMHOTEL
         </div>
       </div>
-    </nav>
+
+      <box-icon type="solid" name="plane"></box-icon>
+
+      <nav>
+        <button v-on:click="loadHome">Inicio</button>
+        <!-- v-if="is_auth" -->
+        <!-- <button v-on:click="this.getAllHabitaciones()">Reservas</button> -->
+        <button v-on:click="loadHabitaciones">Buscar Habitaciones</button>
+        <button v-on:click="loadReservas">Reservas</button>
+        <button v-if="is_auth" v-on:click="logOut">Cerrar Sesión</button>
+        <button v-if="!is_auth" v-on:click="loadLogIn">Iniciar Sesión</button>
+        <button v-if="!is_auth" v-on:click="loadSignUp">Registrarse</button>
+      </nav>
+    </div>
     <!-- Navigation 
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
       <div class="container">
@@ -148,7 +95,7 @@
     </div>
     -->
 
-    <div class="main-component">
+    <div class="container-fluid">
       <router-view
         v-on:completedLogIn="completedLogIn"
         v-on:completedSignUp="completedSignUp"
@@ -163,17 +110,11 @@
     </div>
     -->
 
-    <footer class="py-4 bg-black">
-      <div class="container">
-        <p class="m-0 text-center text-white">G2 &copy; P9</p>
-      </div>
-
-      <div class="container">
-        <p class="m-0 text-center text-white">
-          Contactanos: +60 (1) 587 00 00
-          <fa icon="phone" />
-        </p>
-      </div>
+    <footer class="footer">
+      <h2>
+        <img src="./assets/logo3.png" alt="Alternate Text" style="width: 4%" />
+        TURISMHOTEL
+      </h2>
     </footer>
   </div>
 </template>
@@ -213,12 +154,12 @@ export default {
       localStorage.setItem("username", data.username);
       localStorage.setItem("token_access", data.token_access);
       localStorage.setItem("token_refresh", data.token_refresh);
-      alert("Autenticación Exitosa");
-      this.loadHome();
+      //this.$swal.fire("Autenticación Exitosa", "success");
+      this.loadHome();      
     },
 
     completedSignUp: function (data) {
-      alert("Registro Exitoso");
+      this.$swal.fire("OK", "Registro Exitoso", "success");
       this.completedLogIn(data);
     },
 
@@ -236,7 +177,8 @@ export default {
     */
     logOut: function () {
       localStorage.clear();
-      alert("Sesión Cerrada");
+      this.$swal.fire("OK", "Sesión Cerrada", "success");
+      //alert("Sesión Cerrada");
       this.loadLogIn();
     },
   },
@@ -251,5 +193,96 @@ export default {
   padding: 0%;
 
   background: #fdfefe;
+}
+
+body {
+  margin: 0 0 0 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.titulo {
+  font-family: cursive;
+  font-size: 30px;
+}
+
+.imagen {
+  justify-items: left;
+}
+
+.header {
+  margin-top: auto;
+  margin: 0%;
+  padding: 0;
+  width: 100%;
+  height: 10vh;
+  min-height: 100px;
+
+  background-color: orange;
+  color: rgba(0, 0, 255, 0.705);
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h1 {
+  text-align: center;
+  justify-content: left;
+  align-items: center;
+}
+
+.header nav {
+  height: 100%;
+  width: 40%;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  font-size: 20px;
+}
+
+.header nav button {
+  color: white;
+  background: rgba(0, 0, 255, 0.705);
+  border: 1px solid black;
+
+  border-radius: 5px;
+  padding: 5px 5px;
+}
+
+.header nav button:hover {
+  color: #283747;
+  background: #e5e7e9;
+  border: 1px solid #e5e7e9;
+}
+
+footer {
+  margin-top: auto;
+}
+
+.footer {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+
+  margin: 0;
+  padding: 0;
+
+  height: 10vh;
+  min-height: 100px;
+
+  background-color: orange;
+  color: blue;
+}
+
+.footer h2 {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

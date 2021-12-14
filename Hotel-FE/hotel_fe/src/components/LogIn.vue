@@ -11,7 +11,7 @@
                 type="text"
                 class="form-control"
                 id="exampleInputEmail1"
-                v-model="user.username"                
+                v-model="user.username"
               />
             </div>
             <div class="mb-3">
@@ -29,7 +29,8 @@
               Ingresar
             </button>
             <div class="sign-up mt-4">
-              ¿No tienes cuenta? <a href="#" v-on:click="loadSignUp">Crea una cuenta</a>
+              ¿No tienes cuenta?
+              <a href="#" v-on:click="loadSignUp">Crea una cuenta</a>
             </div>
           </form>
         </div>
@@ -63,7 +64,7 @@
 import gql from "graphql-tag";
 
 export default {
-  name: "LogIn",
+  name: "Login",
 
   data: function () {
     return {
@@ -79,7 +80,7 @@ export default {
       await this.$apollo
         .mutate({
           mutation: gql`
-            mutation ($credentials: CredentialsInput!) {
+            mutation LogIn($credentials: CredentialsInput!) {
               logIn(credentials: $credentials) {
                 refresh
                 access
@@ -97,14 +98,21 @@ export default {
             token_refresh: result.data.logIn.refresh,
           };
 
-          this.$emit("completedLogIn", dataLogIn);
+          this.$swal.fire("OK", "Credenciales correctas", "success");
+          this.loadHome();
+          this.$route.meta.requiresAuth
+
+          //this.$emit("completedLogIn", dataLogIn);
         })
         .catch((error) => {
-          alert("ERROR 401: Credenciales Incorrectas.");
+          this.$swal.fire("ERROR 401", "Credenciales Incorrectas.", "error");
         });
     },
-    loadSignUp: function(){
-      this.$router.push({name: "signUp"})
+    loadSignUp: function () {
+      this.$router.push({ name: "signUp" });
+    },
+    loadHome: function () {
+      this.$router.push({ name: "home" });
     },
   },
 };
@@ -112,8 +120,12 @@ export default {
 
 
 <style>
-html, body, .container{
-  height: 100%;
+.container {
+  height: 79vh !important;
+  background: url("https://cdn.forbes.co/2020/02/sofitel-legend-santa-clara-outdoor-pool.jpg");
+  background-size: cover;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
 }
 
 .login-form {
